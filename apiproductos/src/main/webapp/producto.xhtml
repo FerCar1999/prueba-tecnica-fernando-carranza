@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="jakarta.faces.html">
+<h:head>
+    <title>Lista de Productos</title>
+</h:head>
+<h:body>
+    <h:form>
+        <p:dataTable value="#{productoBean.productos}" var="producto" 
+                     styleClass="product-table" paginator="true" rows="10">
+
+            <p:column headerText="ID">
+                <h:outputText value="#{producto.id}" />
+            </p:column>
+
+            <p:column headerText="Nombre">
+                <h:outputText value="#{producto.nombre}" />
+            </p:column>
+
+            <p:column headerText="Descripción">
+                <h:outputText value="#{producto.descripcion}" />
+            </p:column>
+
+            <p:column headerText="Precio">
+                <h:outputText value="#{producto.precio}" />
+            </p:column>
+
+            <p:column headerText="Categoría">
+                <h:outputText value="#{producto.categoria.nombre}" />
+            </p:column>
+
+            <p:column headerText="Acciones">
+                <p:commandButton value="Editar" 
+                                 action="#{productoBean.editarProducto(producto)}" />
+                <p:commandButton value="Eliminar" 
+                                 action="#{productoBean.eliminarProducto(producto.id)}" />
+            </p:column>
+        </p:dataTable>
+
+        <p:commandButton value="Nuevo Producto" action="crearProducto.xhtml" />
+    </h:form>
+</h:body>
+</html>

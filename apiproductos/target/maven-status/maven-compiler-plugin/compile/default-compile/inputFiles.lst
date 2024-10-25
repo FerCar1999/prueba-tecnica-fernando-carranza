@@ -1,0 +1,11 @@
+/home/fer/Documentos/personal/prueba-tecnica-fernando-carranza/apiproductos/src/main/java/com/mycompany/apiproductos/modelos/Auditable.java
+/home/fer/Documentos/personal/prueba-tecnica-fernando-carranza/apiproductos/src/main/java/com/mycompany/apiproductos/repositorios/ProductoRepositorio.java
+/home/fer/Documentos/personal/prueba-tecnica-fernando-carranza/apiproductos/src/main/java/com/mycompany/apiproductos/resources/ProductoResource.java
+/home/fer/Documentos/personal/prueba-tecnica-fernando-carranza/apiproductos/src/main/java/com/mycompany/apiproductos/servicios/CategoriaServicio.java
+/home/fer/Documentos/personal/prueba-tecnica-fernando-carranza/apiproductos/src/main/java/com/mycompany/apiproductos/repositorios/CategoriaRepositorio.java
+/home/fer/Documentos/personal/prueba-tecnica-fernando-carranza/apiproductos/src/main/java/com/mycompany/apiproductos/JakartaRestConfiguration.java
+/home/fer/Documentos/personal/prueba-tecnica-fernando-carranza/apiproductos/src/main/java/com/mycompany/apiproductos/resources/JakartaEE10Resource.java
+/home/fer/Documentos/personal/prueba-tecnica-fernando-carranza/apiproductos/src/main/java/com/mycompany/apiproductos/modelos/Producto.java
+/home/fer/Documentos/personal/prueba-tecnica-fernando-carranza/apiproductos/src/main/java/com/mycompany/apiproductos/modelos/Categoria.java
+/home/fer/Documentos/personal/prueba-tecnica-fernando-carranza/apiproductos/src/main/java/com/mycompany/apiproductos/beans/ProductoBean.java
+/home/fer/Documentos/personal/prueba-tecnica-fernando-carranza/apiproductos/src/main/java/com/mycompany/apiproductos/servicios/ProductoServicio.java
