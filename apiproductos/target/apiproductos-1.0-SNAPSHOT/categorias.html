@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Gestión de Categorias</title>
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Mi Tienda</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="categorias.html">Categorías</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="productos.html">Productos</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+<div class="container mt-5">
+    <h2>Gestión de Categorias</h2>
+
+    <!-- Formulario para Crear/Modificar Producto -->
+    <form id="categoriaForm">
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+        </div>
+        <input type="hidden" name="id" id="id"/>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="producto" class="btn btn-secondary">Cancelar</a>
+    </form>
+
+    <hr>
+
+    <!-- Lista de Productos -->
+    <h4>Lista de Categorias</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Las categorias se cargarán aquí mediante JavaScript -->
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    document.getElementById('categoriaForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const id = document.getElementById('id').value;
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+        const urlencoded = new URLSearchParams();
+        urlencoded.append("id", id);
+        urlencoded.append("nombre", document.getElementById('nombre').value);
+
+        const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: urlencoded,
+            redirect: "follow"
+        };
+
+        const url = id ? `categoria?id=${id}` : 'categoria';
+
+        fetch(url, requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    cargarCategorias();
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Ocurrió un error al procesar tu solicitud.');
+            });
+    });
+
+    function cargarCategorias() {
+        fetch('categoria')
+            .then(response => response.json())
+            .then(categorias => {
+                const tbody = document.querySelector('tbody');
+                tbody.innerHTML = '';
+
+                categorias.forEach(categoria => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${categoria.nombre}</td>
+                        <td>
+                            <button onclick="obtenerCategoria('${categoria.id}')" class="btn btn-warning btn-sm">Editar</button>
+                            <button class="btn btn-danger btn-sm" onclick="eliminarCategoria('${categoria.id}')">Eliminar</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Ocurrió un error al cargar las categorias.');
+            });
+    }
+
+    function eliminarCategoria(id) {
+        if (confirm('¿Estás seguro de que deseas eliminar esta categoria?')) {
+            fetch(`categoria?id=${id}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    cargarCategorias();
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    }
+    
+    function obtenerCategoria(id) {
+            fetch(`categoria?id=${id}`, {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('id').value=data.id;
+                document.getElementById('nombre').value=data.nombre;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        cargarCategorias();
+    });
+</script>
+</body>
+</html>

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.apiproductos.servicios;
 
 import com.mycompany.apiproductos.modelos.Categoria;
@@ -9,34 +5,52 @@ import com.mycompany.apiproductos.repositorios.CategoriaRepositorio;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import java.util.List;
-import java.util.UUID;
 
-/**
- *
- * @author fer
- */
 @Stateless
 public class CategoriaServicio {
     @Inject
     private CategoriaRepositorio categoriaRepositorio;
-    
-      public List<Categoria> obtenerTodos() {
+
+    public List<Categoria> obtenerTodos() {
         return categoriaRepositorio.listar();
     }
-      
-    public void registrar(Categoria categoria) {
-        categoriaRepositorio.guardar(categoria);
+
+    public Categoria buscarPorId(Integer id) {
+        return categoriaRepositorio.buscarPorId(id);
     }
 
-    public void actualizar(UUID id, Categoria categoriaActualizada) {
-        Categoria categoria = categoriaRepositorio.buscarPorId(id);
-        if (categoria != null) {
-            categoria.setNombre(categoriaActualizada.getNombre());
+    public boolean registrar(Categoria categoria) {
+        try {
             categoriaRepositorio.guardar(categoria);
+            return true; // Registro exitoso
+        } catch (Exception e) { // Manejar excepciones si es necesario
+            // Manejar excepciones si es necesario
+            return false; // Fallo en el registro
         }
     }
 
-    public void eliminar(UUID id) {
-        categoriaRepositorio.eliminar(id);
+    public boolean actualizar(Integer id, Categoria categoriaActualizada) {
+        Categoria categoria = categoriaRepositorio.buscarPorId(id);
+        if (categoria != null) {
+            categoria.setNombre(categoriaActualizada.getNombre());
+            try {
+                categoriaRepositorio.modificar(categoria);
+                return true; // Actualización exitosa
+            } catch (Exception e) { // Manejar excepciones si es necesario
+                // Manejar excepciones si es necesario
+                return false; // Fallo en la actualización
+            }
+        }
+        return false; // Categoría no encontrada
+    }
+
+    public boolean eliminar(Integer id) {
+        try {
+            categoriaRepositorio.eliminar(id);
+            return true; // Eliminación exitosa
+        } catch (Exception e) { // Manejar excepciones si es necesario
+            // Manejar excepciones si es necesario
+            return false; // Fallo en la eliminación
+        }
     }
 }

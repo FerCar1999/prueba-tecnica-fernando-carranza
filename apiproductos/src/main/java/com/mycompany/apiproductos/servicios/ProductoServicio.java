@@ -24,26 +24,31 @@ public class ProductoServicio {
       public List<Producto> obtenerTodos() {
         return productoRepositorio.listar();
     }
+      
+      public Producto buscarPorId(Integer id){
+          return productoRepositorio.buscarPorId(id);
+      }
 
-    public List<Producto> obtenerPorCategoria(UUID categoriaId) {
+    public List<Producto> obtenerPorCategoria(Integer categoriaId) {
         return productoRepositorio.buscarPorCategoria(categoriaId);
     }
 
-    public void registrar(Producto producto, UUID categoriaId) {
+    public void registrar(Producto producto, Integer categoriaId) {
         productoRepositorio.guardar(producto);
     }
 
-    public void actualizar(UUID id, Producto productoActualizado) {
+    public void actualizar(Integer id, Producto productoActualizado) {
         Producto producto = productoRepositorio.buscarPorId(id);
         if (producto != null) {
             producto.setNombre(productoActualizado.getNombre());
             producto.setDescripcion(productoActualizado.getDescripcion());
             producto.setPrecio(productoActualizado.getPrecio());
+            producto.setCategoria(productoActualizado.getCategoria());
             productoRepositorio.guardar(producto);
         }
     }
 
-    public void eliminar(UUID id) {
+    public void eliminar(Integer id) {
         productoRepositorio.eliminar(id);
     }
 }

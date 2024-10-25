@@ -23,23 +23,30 @@ public class CategoriaRepositorio {
     private EntityManager em;
     
     public List<Categoria> listar() {
-        return em.createQuery("SELECT c FROM Categoria c WHERE c.deletedAt IS NULL", Categoria.class)
+        return em.createQuery("SELECT c FROM Categoria c", Categoria.class)
                  .getResultList();
     }
 
-    public Categoria buscarPorId(UUID id) {
+    public Categoria buscarPorId(Integer id) {
         return em.find(Categoria.class, id);
     }
 
     public void guardar(Categoria categoria) {
+        if (categoria.getId() != null) {
+            em.merge(categoria);
+        } else {
+            em.persist(categoria);
+        }
+    }
+
+    public void modificar(Categoria categoria) {
         em.merge(categoria);
     }
 
-    public void eliminar(UUID id) {
+    public void eliminar(Integer id) {
         Categoria categoria = buscarPorId(id);
         if (categoria != null) {
-            categoria.setDeletedAt(LocalDateTime.now());
-            em.merge(categoria);
+            em.remove(categoria);
         }
     }
 }

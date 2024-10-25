@@ -1,11 +1,11 @@
 com/mycompany/apiproductos/repositorios/ProductoRepositorio.class
 com/mycompany/apiproductos/modelos/Producto.class
+com/mycompany/apiproductos/vistas/CategoriaServlet.class
 com/mycompany/apiproductos/servicios/CategoriaServicio.class
-com/mycompany/apiproductos/resources/ProductoResource.class
 com/mycompany/apiproductos/servicios/ProductoServicio.class
 com/mycompany/apiproductos/repositorios/CategoriaRepositorio.class
 com/mycompany/apiproductos/modelos/Auditable.class
 com/mycompany/apiproductos/modelos/Categoria.class
 com/mycompany/apiproductos/resources/JakartaEE10Resource.class
-com/mycompany/apiproductos/beans/ProductoBean.class
 com/mycompany/apiproductos/JakartaRestConfiguration.class
+com/mycompany/apiproductos/vistas/ProductoServlet.class

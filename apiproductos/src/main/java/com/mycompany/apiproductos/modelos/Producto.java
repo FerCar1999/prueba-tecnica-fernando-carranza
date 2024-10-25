@@ -20,11 +20,10 @@ import java.util.UUID;
 
 @Entity
 @Table(name="productos")
-public class Producto extends Auditable{
+public class Producto{
     @Id
-    @GeneratedValue(generator = "UUID")
-    @Column(name="id",updatable=false, nullable=false, columnDefinition = "CHAR(36)")
-    private UUID id;
+    @GeneratedValue(generator = "GenerationType.IDENTITY")
+    private Integer id;
     
     private String nombre;
     private String descripcion;
@@ -32,23 +31,12 @@ public class Producto extends Auditable{
     @ManyToOne
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
-
-    public Producto() {
-    }
-
-    public Producto(UUID id, String nombre, String descripcion, double precio, Categoria categoria) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.categoria = categoria;
-    }
-
-    public UUID getId() {
+    
+    public Integer getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

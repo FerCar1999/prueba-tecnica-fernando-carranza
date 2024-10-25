@@ -8,9 +8,7 @@ import com.mycompany.apiproductos.modelos.Producto;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -22,16 +20,16 @@ public class ProductoRepositorio {
     private EntityManager em;
     
     public List<Producto> listar() {
-        return em.createQuery("SELECT p FROM Producto p WHERE p.deletedAt IS NULL", Producto.class)
+        return em.createQuery("SELECT p FROM Producto p", Producto.class)
                  .getResultList();
     }
     
-    public List<Producto> buscarPorCategoria(UUID categoriaId){
-        return em.createQuery("SELECT p FROM Producto p WHERE p.categoria.id=:categoriaId AND p.deletedAt IS NULL", Producto.class)
+    public List<Producto> buscarPorCategoria(Integer categoriaId){
+        return em.createQuery("SELECT p FROM Producto p WHERE p.categoria.id=:categoriaId", Producto.class)
                 .setParameter("categoriaId",categoriaId).getResultList();
     }
 
-    public Producto buscarPorId(UUID id) {
+    public Producto buscarPorId(Integer id) {
         return em.find(Producto.class, id);
     }
 
@@ -39,11 +37,10 @@ public class ProductoRepositorio {
         em.merge(producto);
     }
 
-    public void eliminar(UUID id) {
+    public void eliminar(Integer id) {
         Producto producto = buscarPorId(id);
         if (producto != null) {
-            producto.setDeletedAt(LocalDateTime.now());
-            em.merge(producto);
+            em.remove(producto);
         }
     }
 }

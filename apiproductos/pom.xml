@@ -30,32 +30,16 @@
             <artifactId>mysql-connector-j</artifactId>
             <version>8.1.0</version>
          </dependency>
-        <dependency>
-          <groupId>javax.servlet</groupId>
-          <artifactId>javax.servlet-api</artifactId>
-          <version>4.0.1</version> <!-- Asegúrate de que la versión sea compatible -->
-          <scope>provided</scope>
+         <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.0</version> <!-- Check for the latest version -->
         </dependency>
         <dependency>
-          <groupId>javax.servlet.jsp</groupId>
-          <artifactId>javax.servlet.jsp-api</artifactId>
-          <version>2.3.3</version>
-          <scope>provided</scope>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.17.0</version> <!-- Asegúrate de usar la misma versión que jackson-databind -->
         </dependency>
-         <!-- PrimeFaces -->
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>13.0.0</version> <!-- O la versión que prefieras -->
-        </dependency>
-<!-- https://mvnrepository.com/artifact/jakarta.faces/jakarta.faces-api -->
-        <dependency>
-            <groupId>jakarta.faces</groupId>
-            <artifactId>jakarta.faces-api</artifactId>
-            <version>4.0.1</version>
-        </dependency>
-
-
     </dependencies>
     
     <build>

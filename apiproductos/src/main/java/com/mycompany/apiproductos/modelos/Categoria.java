@@ -5,23 +5,22 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "categorias")
-public class Categoria extends Auditable {
+public class Categoria {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "CHAR(36)")
-    private UUID id;
+    @GeneratedValue(generator = "GenerationType.IDENTITY")
+    private Integer id;
 
     @Column(nullable = false, unique = true)
     private String nombre;
 
     // Getters y Setters
 
-    public UUID getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
